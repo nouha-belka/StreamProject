@@ -8,7 +8,7 @@ public class Main {
         CarOps carOps = new CarOps();
         StudentOps studentOps = new StudentOps();
 
-        System.out.println(carOps.getCarCount());
-        System.out.println(studentOps.getStudentCount());
+        // System.out.println(carOps.getCarCount());
+        System.out.println(studentOps.getStudentsGPA35List());
     }
 }

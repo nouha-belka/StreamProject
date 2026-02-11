@@ -1,14 +1,33 @@
 package org.blitmatthew.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.blitmatthew.data.DataRetriever;
 import org.blitmatthew.entity.Student;
 
-import java.util.List;
-
 public class StudentOps {
     private List<Student> students = DataRetriever.getStudents();
-
+    
     public Integer getStudentCount() {
         return students.size();
+    }
+    // Find all students with GPA above 3.5
+    // public List<Student> getStudentsGPA35List(){
+
+    //     final List<Student> studentsWithGPA35 = new ArrayList<Student>() ;
+
+    //     for (Student student : students) {
+    //         if(student.getGpa() >= 3.5){
+    //             studentsWithGPA35.add(student);
+    //         }
+    //     }
+
+    //     return studentsWithGPA35;
+
+    // }
+
+    public List<Student> getStudentsGPA35List(){
+        return students.stream().filter(x -> x.getGpa() >= 3.5).collect(Collectors.toList());
     }
 }

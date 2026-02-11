@@ -1,5 +1,6 @@
 package org.blitmatthew.service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -73,6 +74,19 @@ public class StudentOps {
     // Students with GPA between 3.0 and 3.5
     public List<Student> geStudentGPABetween3and35( ){
         return students.stream().filter(x -> x.getGpa() >= 3 && x.getGpa() <= 3.5).collect(Collectors.toList());
+    }
+    
+    // International students in STEM majors
+    public List<Student> geInternationalStemStudents( ){
+        List<String> majors = Arrays.asList(
+            "Biology",
+            "Chemistry",
+            "Physics",
+            "Computer Science",
+            "Mechanical Engineering",
+            "Electrical Engineering"
+        );
+        return students.stream().filter(x -> x.isInternational() &&  majors.contains(x.getMajor())).collect(Collectors.toList());
     }
 
     

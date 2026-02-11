@@ -41,4 +41,9 @@ public class StudentOps {
         return students.stream().filter(x -> x.isInternational()).collect(Collectors.toList());
     }
 
+    // Find students in Computer Science major
+    public List<Student> getCSStudents(){
+        return students.stream().filter(x -> x.getMajor().equals("Computer Science")).collect(Collectors.toList());
+    }
+
 }

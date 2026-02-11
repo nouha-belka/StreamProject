@@ -30,4 +30,9 @@ public class StudentOps {
     public List<Student> getStudentsGPA35List(){
         return students.stream().filter(x -> x.getGpa() >= 3.5).collect(Collectors.toList());
     }
+
+    // List students under 20 years old
+    public List<Student> getStudentsYoungerThan20(){
+        return students.stream().filter(x -> x.getAge() < 20).collect(Collectors.toList());
+    }
 }

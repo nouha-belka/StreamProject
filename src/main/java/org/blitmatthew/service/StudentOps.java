@@ -46,4 +46,9 @@ public class StudentOps {
         return students.stream().filter(x -> x.getMajor().equals("Computer Science")).collect(Collectors.toList());
     }
 
+    // List students from specific universities
+    public List<Student> geStudentsFromUni(String uniName){
+        return students.stream().filter(x -> x.getUniversity().equals(uniName)).collect(Collectors.toList());
+    }
+
 }

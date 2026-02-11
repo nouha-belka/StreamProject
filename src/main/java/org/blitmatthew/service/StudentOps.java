@@ -60,6 +60,12 @@ public class StudentOps {
     public List<Student> geStudentsByYear(int graduationYear){
         return students.stream().filter(x -> x.getGraduationYear() == graduationYear).collect(Collectors.toList());
     }
+    
+    //Find students with exactly 60 credit hours
+    public List<Student> geStudents60CreditList( ){
+        return students.stream().filter(x -> x.getCreditHours() == 60).collect(Collectors.toList());
+    }
+
 
 
 

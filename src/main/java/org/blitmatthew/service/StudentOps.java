@@ -8,7 +8,7 @@ import org.blitmatthew.data.DataRetriever;
 import org.blitmatthew.entity.Student;
 
 public class StudentOps {
-    private List<Student> students = DataRetriever.getStudents();
+    private final List<Student> students = DataRetriever.getStudents();
     
     public Integer getStudentCount() {
         return students.size();
@@ -89,6 +89,10 @@ public class StudentOps {
         return students.stream().filter(x -> x.isInternational() &&  majors.contains(x.getMajor())).collect(Collectors.toList());
     }
 
+    // Scholarship recipients with high credit hours
+    public List<Student> geScolarshipStudentsWithHighCredits( ){
+        return students.stream().filter(x -> x.isScholarshipRecipient() && x.getCreditHours() >= 60).collect(Collectors.toList());
+    }
     
 
 }

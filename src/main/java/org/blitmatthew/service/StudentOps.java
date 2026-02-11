@@ -50,5 +50,13 @@ public class StudentOps {
     public List<Student> geStudentsFromUni(String uniName){
         return students.stream().filter(x -> x.getUniversity().equals(uniName)).collect(Collectors.toList());
     }
+    
+    // Identify students with scholarship
+    public List<Student> geScholarshipStudents(){
+        return students.stream().filter(x -> x.isScholarshipRecipient()).collect(Collectors.toList());
+    }
+
+
+    
 
 }

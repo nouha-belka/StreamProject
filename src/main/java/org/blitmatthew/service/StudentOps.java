@@ -55,6 +55,12 @@ public class StudentOps {
     public List<Student> geScholarshipStudents(){
         return students.stream().filter(x -> x.isScholarshipRecipient()).collect(Collectors.toList());
     }
+    
+    //Filter students by graduation year
+    public List<Student> geStudentsByYear(int graduationYear){
+        return students.stream().filter(x -> x.getGraduationYear() == graduationYear).collect(Collectors.toList());
+    }
+
 
 
     

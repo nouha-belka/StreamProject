@@ -12,6 +12,8 @@ public class StudentOps {
     public Integer getStudentCount() {
         return students.size();
     }
+
+    /////////////////////////////////////////////////////////////// Basic Filtering Tasks ///////////////////////////////////////////////////////////////
     // Find all students with GPA above 3.5
     // public List<Student> getStudentsGPA35List(){
 
@@ -65,9 +67,13 @@ public class StudentOps {
     public List<Student> geStudents60CreditList( ){
         return students.stream().filter(x -> x.getCreditHours() == 60).collect(Collectors.toList());
     }
-
-
-
+    
+    
+    /////////////////////////////////////////////////////////////// Advanced Filtering Tasks ///////////////////////////////////////////////////////////////
+    // Students with GPA between 3.0 and 3.5
+    public List<Student> geStudentGPABetween3and35( ){
+        return students.stream().filter(x -> x.getGpa() >= 3 && x.getGpa() <= 3.5).collect(Collectors.toList());
+    }
 
     
 

@@ -35,4 +35,10 @@ public class StudentOps {
     public List<Student> getStudentsYoungerThan20(){
         return students.stream().filter(x -> x.getAge() < 20).collect(Collectors.toList());
     }
+
+    //Identify all international students
+    public List<Student>  getInternationalStudent(){
+        return students.stream().filter(x -> x.isInternational()).collect(Collectors.toList());
+    }
+
 }

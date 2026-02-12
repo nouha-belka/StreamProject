@@ -9,6 +9,6 @@ public class Main {
         StudentOps studentOps = new StudentOps();
 
         // System.out.println(carOps.getCarCount());
-        System.out.println(studentOps.getStudentNearGrad(2024));
+        System.out.println(studentOps.getStudentCountPerMajor());
     }
 }

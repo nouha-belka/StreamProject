@@ -3,6 +3,7 @@ package org.blitmatthew.service;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.blitmatthew.data.DataRetriever;
@@ -72,6 +73,8 @@ public class StudentOps {
     
     
     /////////////////////////////////////////////////////////////// Advanced Filtering Tasks ///////////////////////////////////////////////////////////////
+    /// 
+    /// 
     // Students with GPA between 3.0 and 3.5
     public List<Student> geStudentGPABetween3and35( ){
         return students.stream().filter(x -> x.getGpa() >= 3 && x.getGpa() <= 3.5).collect(Collectors.toList());
@@ -149,4 +152,18 @@ public class StudentOps {
     public List<Student> getStudentNearGrad(int requestYear){
         return students.stream().filter( x -> x.getGraduationYear() >= requestYear -2 && x.getGraduationYear() <= requestYear +2 ).collect(Collectors.toList());
     }
+
+    /////////////////////////////////////////////////////////////// Aggregation and Statistical Analysis ///////////////////////////////////////////////////////////////
+    /// 
+    /// 
+    /// 
+    /// 
+    /// Calculate total number of students per major
+    public Map<String, Long> getStudentCountPerMajor(){
+        return students.stream().collect(Collectors.groupingBy(
+            Student::getMajor,
+            Collectors.counting()
+        ));
+    }
+    
 }

@@ -9,6 +9,7 @@ public class Main {
         StudentOps studentOps = new StudentOps();
 
         // System.out.println(carOps.getCarCount());
-        System.out.println(studentOps.getGpaMedian());
+        System.out.println(studentOps.getYoungestAndOldestStudent());
+        // studentOps.getYoungestAndOldestStudent();
     }
 }

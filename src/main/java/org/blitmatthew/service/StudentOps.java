@@ -224,5 +224,14 @@ public class StudentOps {
         return median;
     }
 
+    // Find the youngest and oldest students
+    public Map<String, Student> getYoungestAndOldestStudent(){
+        return   Map.of(
+           "Oldest",  students.stream().max(Comparator.comparingInt(Student::getAge)).orElse(null),
+           "Youngest",  students.stream().min(Comparator.comparingInt(Student::getAge)).orElse(null)
+        );
+         
+    }
+
     
 }

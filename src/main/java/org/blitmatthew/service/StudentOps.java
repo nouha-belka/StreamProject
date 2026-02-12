@@ -145,4 +145,8 @@ public class StudentOps {
         }).collect(Collectors.toList());
      }
 
+    //  Identify students near graduation (within 2 years)
+    public List<Student> getStudentNearGrad(int requestYear){
+        return students.stream().filter( x -> x.getGraduationYear() >= requestYear -2 && x.getGraduationYear() <= requestYear +2 ).collect(Collectors.toList());
+    }
 }

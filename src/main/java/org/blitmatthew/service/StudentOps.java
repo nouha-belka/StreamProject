@@ -166,4 +166,13 @@ public class StudentOps {
         ));
     }
     
+    // Find average GPA by major
+    public Map<String, Double> getStudentAveragePerMajor(){
+        return students.stream().collect(Collectors.groupingBy(
+            Student::getMajor,
+            Collectors.averagingDouble(Student::getGpa)
+        ));
+    }
+    
+    
 }

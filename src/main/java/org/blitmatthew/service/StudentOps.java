@@ -233,5 +233,11 @@ public class StudentOps {
          
     }
 
+    // Calculate scholarship distribution percentage
+    public long getScholarshipDistPercentage(){
+        long totalStudentCount = students.size();
+        long scholarshipCount = students.stream().filter(x -> x.isScholarshipRecipient()).count();
+        return (scholarshipCount*100) / totalStudentCount;
+    }
     
 }

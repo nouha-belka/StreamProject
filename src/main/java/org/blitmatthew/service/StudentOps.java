@@ -1,6 +1,7 @@
 package org.blitmatthew.service;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -92,6 +93,39 @@ public class StudentOps {
     // Scholarship recipients with high credit hours
     public List<Student> geScolarshipStudentsWithHighCredits( ){
         return students.stream().filter(x -> x.isScholarshipRecipient() && x.getCreditHours() >= 60).collect(Collectors.toList());
+    }
+
+    //Students in top 10% of their class by GPA (i went too far with everything and did some grouing and all meanwhile what was asked for is just a normal list)
+    // public Map<String,Map<Integer, List<Student>>> getTop10StudentsInClass(){
+    //     return students.stream()
+    //     .collect(Collectors.groupingBy(
+    //         Student::getUniversity, 
+    //         Collectors.groupingBy(
+    //             Student::getGraduationYear,
+    //             Collectors.collectingAndThen(
+    //                 Collectors.toList(),
+    //                 list -> {
+    //                     list.sort(Comparator.comparing(Student::getGpa).reversed());
+    //                     int topCount = Math.max(1, (int) Math.ceil(list.size()*0.1));
+    //                     return list.subList(0, topCount);
+    //                 }
+    //             )
+    //         )
+    //     ));
+
+    // }
+
+    //Students in top 10% of their class by GPA 
+    public List<Student>getTop10StudentsInClass(String uni, int gradYear){
+        return students.stream().filter(x -> x.getGraduationYear() == gradYear && x.getUniversity().equals(uni))
+        .collect(Collectors.collectingAndThen(
+            Collectors.toList(), 
+            list -> {
+                list.sort(Comparator.comparing(Student::getGpa).reversed());
+                int topCount = Math.max(1, (int) Math.ceil(list.size()*0.1));
+                return list.subList(0, topCount);
+            }
+        ));
     }
     
 

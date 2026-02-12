@@ -132,6 +132,17 @@ public class StudentOps {
     public List<Student> getStudentsFromAreaCode(String areaCode){
         return students.stream().filter(x -> x.getPhoneNumber().startsWith("(" + areaCode + ")")).collect(Collectors.toList());
     }
-    
+
+    // Find students born in specific months
+     public List<Student> getStudentsByMonth(String... months){
+        return students.stream().filter( x -> {
+            for(String month : months){
+                 if(x.getDateOfBirth().contains("-" +  month +  "-")){
+                    return true;
+                 }
+            }
+            return false;
+        }).collect(Collectors.toList());
+     }
 
 }

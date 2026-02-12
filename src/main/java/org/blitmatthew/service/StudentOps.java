@@ -1,6 +1,5 @@
 package org.blitmatthew.service;
 
-import java.nio.LongBuffer;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -260,5 +259,17 @@ public class StudentOps {
 
         // System.out.println();
 
+    }
+
+    // Find universities with highest average GPA
+    public String  getHighestAverageGpaUni(){
+        return students.stream().collect(Collectors.groupingBy(
+            Student::getUniversity,
+            Collectors.averagingDouble(Student::getGpa)))
+            .entrySet()
+            .stream()
+            .max(Map.Entry.comparingByValue())
+            .map(Map.Entry::getKey).orElse("other");
+        
     }
 }

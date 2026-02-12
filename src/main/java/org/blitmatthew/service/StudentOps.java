@@ -1,5 +1,6 @@
 package org.blitmatthew.service;
 
+import java.nio.LongBuffer;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -240,4 +241,24 @@ public class StudentOps {
         return (scholarshipCount*100) / totalStudentCount;
     }
     
+    // Determine gender ratio in different majors
+
+    public Map<String, Map< String, Long>> getGenderRationByMajor(){
+        //me complicating it again
+        // return students.stream().collect(Collectors.groupingBy(Student::getMajor,
+        //     Collectors.groupingBy(Student::getGender,
+        //         Collectors.collectingAndThen(
+        //             Collectors.toList(), 
+        //             list -> {
+        //                 return list.size();
+        //             }
+        //         )
+        //     )
+        // ));
+        return students.stream().collect(Collectors.groupingBy(Student::getMajor,
+            Collectors.groupingBy(Student::getGender, Collectors.counting())));
+
+        // System.out.println();
+
+    }
 }

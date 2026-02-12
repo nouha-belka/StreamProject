@@ -192,6 +192,37 @@ public class StudentOps {
     public int getTotalCreditHours(){
         return students.stream().mapToInt(Student::getCreditHours).sum();
     }
+    // Compute median GPA
+    public double getGpaMedian(){
+
+        // first method only get GPA list from stream and then calculate the median
+        // List<Double> gpaList =  students.stream().map(Student::getGpa).sorted().collect(Collectors.toList());
+
+        // int listSize = gpaList.size();
+        // double median;
+        // if( listSize == 0 ){
+        //     median = 0;
+        // }else if(listSize % 2 == 0 ){
+        //     median = gpaList.get(listSize/2);
+        // }
+        // else{
+        //     median = (gpaList.get(listSize / 2 - 1) + gpaList.get(listSize / 2)) / 2.0;
+        // }
+
+        //second method use the collectingAndThen stream method
+        double median = students.stream().map(Student::getGpa)
+                                .sorted().collect(Collectors.collectingAndThen(
+                                    Collectors.toList(), 
+                                    list -> {
+                                        int listSize = list.size();
+                                        if (listSize == 0 ) return 0.0;
+                                        if (listSize % 2 == 1 ) return list.get(listSize/2);
+                                        else return (list.get(listSize / 2 - 1) + list.get(listSize / 2)) / 2.0;
+                                    }
+                                ));
+        // System.out.println(median);
+        return median;
+    }
 
     
 }

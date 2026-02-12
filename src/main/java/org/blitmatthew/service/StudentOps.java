@@ -178,8 +178,15 @@ public class StudentOps {
     public long getInternationalStudentPercentage(){
         long totalStudentCount = students.size();
         long internationalStudentCount =  students.stream().filter( x -> x.isInternational()).count();
-
+        
         return (internationalStudentCount * 100) / totalStudentCount;
     }
+    
+    // Calculate average age of students
+    public Double getAvgAge(){
+        // System.out.println(students.stream().mapToInt(Student::getAge).boxed().collect(Collectors.toList()));
+        return students.stream().mapToInt(Student::getAge).average().orElse(0);
+    }
+
     
 }

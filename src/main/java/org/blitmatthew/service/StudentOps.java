@@ -174,5 +174,12 @@ public class StudentOps {
         ));
     }
     
+    // Determine percentage of international students
+    public long getInternationalStudentPercentage(){
+        long totalStudentCount = students.size();
+        long internationalStudentCount =  students.stream().filter( x -> x.isInternational()).count();
+
+        return (internationalStudentCount * 100) / totalStudentCount;
+    }
     
 }

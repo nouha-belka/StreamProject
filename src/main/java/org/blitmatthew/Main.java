@@ -9,6 +9,6 @@ public class Main {
         StudentOps studentOps = new StudentOps();
 
         // System.out.println(carOps.getCarCount());
-        System.out.println(studentOps.getStudentAveragePerMajor());
+        System.out.println(studentOps.getInternationalStudentPercentage());
     }
 }

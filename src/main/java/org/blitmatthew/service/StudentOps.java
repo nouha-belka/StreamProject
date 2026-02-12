@@ -188,5 +188,10 @@ public class StudentOps {
         return students.stream().mapToInt(Student::getAge).average().orElse(0);
     }
 
+    // Find total credit hours across all students
+    public int getTotalCreditHours(){
+        return students.stream().mapToInt(Student::getCreditHours).sum();
+    }
+
     
 }

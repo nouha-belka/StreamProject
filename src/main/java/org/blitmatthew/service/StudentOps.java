@@ -127,6 +127,11 @@ public class StudentOps {
             }
         ));
     }
+
+    // Students with phone numbers from specific area codes
+    public List<Student> getStudentsFromAreaCode(String areaCode){
+        return students.stream().filter(x -> x.getPhoneNumber().startsWith("(" + areaCode + ")")).collect(Collectors.toList());
+    }
     
 
 }

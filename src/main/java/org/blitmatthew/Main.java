@@ -9,6 +9,6 @@ public class Main {
         StudentOps studentOps = new StudentOps();
 
         // System.out.println(carOps.getCarCount());
-        System.out.println(studentOps.getTop10StudentsInClass("Innovation Institute", 2024));
+        System.out.println(studentOps.getStudentsFromAreaCode("240"));
     }
 }

@@ -367,6 +367,19 @@ public class StudentOps {
         }
     }
 
+    // Group students by complex multi-dimensional criteria
+    public Map< String,Map< Integer, Map<Double, List<Student> >>> groupStudents(){
+        return students.stream().collect(Collectors.groupingBy(
+            Student::getUniversity,
+            Collectors.groupingBy(
+                Student::getGraduationYear,
+                Collectors.groupingBy(
+                    Student::getGpa
+                )
+            )
+        ));
+    }
+
     
 
 

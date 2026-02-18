@@ -1,7 +1,12 @@
 package org.blitmatthew.service;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.blitmatthew.data.DataRetriever;
@@ -24,7 +29,7 @@ public class CarOps {
         return cars.stream().filter(x -> x.getFuelType().equals("Electric")).collect(Collectors.toList());
     }
 
-    // List cars under $30,000
+    // List cars under ,000
     public  List<Car> getCarsUnderUnderThirtyK(){
         return cars.stream().filter(x -> x.getPrice() < 30000).collect(Collectors.toList());
     }
@@ -61,5 +66,55 @@ public class CarOps {
         return cars.stream().filter(x -> fuelList.contains(x.getFuelType()) ).collect(Collectors.toList());
     }
     
+    /////////////////////////////////////////////////////////////// Advanced Filtering Tasks///////////////////////////////////////////////////////////////
+    /// 
+    /// 
+    /// 
+    /// Cars with price between ,000 and ,000
+    public List<Car> getCarsbetween40kAnd60k(){
+        return cars.stream().filter(x -> x.getMileage() >= 40000 && x.getMileage() <= 60000 ).collect(Collectors.toList());
+    }
+    
+    // Hybrid vehicles manufactured in last 3 years
+    public List<Car> getHybridCarsInLast3Years(){
+        LocalDateTime now = LocalDateTime.now();
+        return cars.stream().filter(x -> x.getFuelType().equals("Hybrid") && x.getYear() > now.getYear() - 3  ).collect(Collectors.toList());
+    }
+    // Low-mileage luxury vehicles
+    public List<Car> getLxuryLowMileageCars(){
+        List<String> luxuryBrands = Arrays.asList(
+            "Audi",
+            "BMW",
+            "Lexus"
+            
+        );
+        return cars.stream().filter(x -> luxuryBrands.contains(x.getMake()) && x.getMileage() <= 10000 ).collect(Collectors.toList());
+    }
+
+    // Performance cars with specific characteristics
+
+    // Vehicles meeting multiple complex criteria
+
+    // Find cars with specific color combinations
+    public List<Car> getCarsWithColors(String... colors){
+        List<String> colorsList = Arrays.asList(colors);
+        return cars.stream().filter(x -> String.join(" ", colorsList).equals(x.getColor())).collect(Collectors.toList());
+    }
+
+    // Identify most and least expensive vehicles by make
+    public Map< String, Map< String, Car>> getMostAndLeastExpansiveCarsByMake(){
+        return cars.stream().collect(Collectors.groupingBy(
+            Car::getMake,
+            Collectors.collectingAndThen(
+                Collectors.toList(),
+                list -> {
+                    Map<String, Car> map = new HashMap<>();
+                    map.put("Most", ((Collection<Car>) list).stream().max( Comparator.comparingDouble(Car::getPrice)).get());
+                    map.put("Least", ((Collection<Car>) list).stream().min( Comparator.comparingDouble(Car::getPrice)).get());
+                    return map;
+                }
+            )
+        ));
+    }
 
 }

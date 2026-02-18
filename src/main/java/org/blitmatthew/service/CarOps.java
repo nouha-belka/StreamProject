@@ -19,7 +19,12 @@ public class CarOps {
     /// 
     /// 
     /// Find all electric vehicles
-    public  List<Car> getElectricCar(){
+    public  List<Car> getElectricCars(){
         return cars.stream().filter(x -> x.getFuelType().equals("Electric")).collect(Collectors.toList());
+    }
+
+    // List cars under $30,000
+    public  List<Car> getCarsUnderUnderThirtyK(){
+        return cars.stream().filter(x -> x.getPrice() < 30000).collect(Collectors.toList());
     }
 }

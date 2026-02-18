@@ -9,7 +9,8 @@ public class Main {
         StudentOps studentOps = new StudentOps();
 
         // System.out.println(carOps.getCarCount());
-        System.out.println(studentOps.getHighestAverageGpaUni());
+        // System.out.println(studentOps.getStudentFromCriteria(2.89, false, true));
+        System.out.println(studentOps.rankStudents2());
         // studentOps.getGenderRationByMajor();
     }
 }

@@ -282,7 +282,7 @@ public class StudentOps {
     // - International student
     // - STEM major
     // - Scholarship recipient
-    public List<Student> getStudentFromCriteria(double gpa, boolean isInternational, String major, boolean isRecipient){
+    public List<Student> getStudentFromCriteria(double gpa, boolean isInternational,  boolean isRecipient){
         List<String> majors = Arrays.asList(
             "Biology",
             "Chemistry",
@@ -295,6 +295,43 @@ public class StudentOps {
                 .filter( x -> x.getGpa() == gpa && x.isInternational() == isInternational && x.isScholarshipRecipient() == isRecipient &&  majors.contains(x.getMajor()))
                 .collect(Collectors.toList());
     }
+
+    // Create a comprehensive student profile ranking system
+    //just made a ranking system from chatgpt 
+    // GPA_Score * 0.6 + Credit_Score * 0.3 + Scholarship_Status
+    // GPA_Score = GPA / 4
+    //  Credit_Score = Credit_Hours / 120
+    public List<Student> rankStudents(){
+        return students.stream().sorted((s1, s2) -> {
+            double score1 =
+                    0.6 * (s1.getGpa() / 4.0)
+                    + 0.3 * Math.min(s1.getCreditHours() / 120.0, 1.0)
+                    + (s1.isScholarshipRecipient() ? 0.1 : 0.0);
+
+            double score2 =
+                    0.6 * (s2.getGpa() / 4.0)
+                    + 0.3 * Math.min(s2.getCreditHours() / 120.0, 1.0)
+                    + (s2.isScholarshipRecipient() ? 0.1 : 0.0);
+            return  Double.compare(score2, score1); // descending
+        }).toList();
+    }
+    // chatgpt told me there is a better way to do it 
+    // create a funtion seprately 
+    public double calculateScore(Student student) {
+        double gpaScore = student.getGpa() / 4.0;
+        double creditScore = Math.min(student.getCreditHours() / 120.0, 1.0);
+        double scholarshipBonus = student.isScholarshipRecipient() ? 0.1 : 0.0;
+
+        return 0.6 * gpaScore
+            + 0.3 * creditScore
+            + scholarshipBonus;
+    }
+    public List<Student> rankStudents2(){
+        return students.stream()
+                        .sorted(Comparator.comparingDouble((Student x) -> calculateScore(x)).reversed())
+                        .toList();
+    }
+
     
 
 

@@ -8,7 +8,7 @@ public class Main {
         CarOps carOps = new CarOps();
         // StudentOps studentOps = new StudentOps();
 
-        System.out.println(carOps.getElectricCar());
+        System.out.println(carOps.getCarsFromManufacturer("Volvo", "Toyota"));
         // System.out.println(studentOps.getStudentFromCriteria(2.89, false, true));
         // System.out.println(studentOps.groupStudents());
         // studentOps.analyseCorelation();

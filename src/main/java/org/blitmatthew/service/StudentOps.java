@@ -241,7 +241,6 @@ public class StudentOps {
     }
     
     // Determine gender ratio in different majors
-
     public Map<String, Map< String, Long>> getGenderRationByMajor(){
         //me complicating it again
         // return students.stream().collect(Collectors.groupingBy(Student::getMajor,
@@ -272,4 +271,31 @@ public class StudentOps {
             .map(Map.Entry::getKey).orElse("other");
         
     }
+
+    /////////////////////////////////////////////////////////////// Complex Analytical Tasks ///////////////////////////////////////////////////////////////
+    /// 
+    /// 
+    /// 
+    /// 
+    /// Identify students matching multiple criteria:
+    // - GPA > 3.7
+    // - International student
+    // - STEM major
+    // - Scholarship recipient
+    public List<Student> getStudentFromCriteria(double gpa, boolean isInternational, String major, boolean isRecipient){
+        List<String> majors = Arrays.asList(
+            "Biology",
+            "Chemistry",
+            "Physics",
+            "Computer Science",
+            "Mechanical Engineering",
+            "Electrical Engineering"
+        );
+        return  students.stream()
+                .filter( x -> x.getGpa() == gpa && x.isInternational() == isInternational && x.isScholarshipRecipient() == isRecipient &&  majors.contains(x.getMajor()))
+                .collect(Collectors.toList());
+    }
+    
+
+
 }

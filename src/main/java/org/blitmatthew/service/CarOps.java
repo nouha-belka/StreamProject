@@ -117,4 +117,52 @@ public class CarOps {
         ));
     }
 
+    /////////////////////////////////////////////////////////////// Aggregation and Statistical Analysis///////////////////////////////////////////////////////////////
+    /// 
+    /// 
+    /// 
+    // Calculate average price by vehicle type
+    public void getAvgPriceByType(){
+        cars.stream().collect(Collectors.groupingBy(
+            Car::getFuelType,
+            Collectors.averagingDouble(Car::getPrice)
+            
+        ));
+    }
+    // Find median mileage across all vehicles
+    // Determine fuel type distribution
+    public void getFuelDes(){
+        cars.stream().collect(Collectors.groupingBy(
+            Car::getFuelType,
+            Collectors.counting()
+            
+        ));
+    }
+    // Compute average vehicle age by manufacturer
+    public Map<String, Double> getAvgAgeByMake(){
+        LocalDateTime now = LocalDateTime.now();
+        return cars.stream().collect(Collectors.groupingBy(
+            Car::getMake,
+            Collectors.averagingDouble(x -> now.getYear() - x.getYear())
+            
+        ));
+    }
+
+    // Analyze price variation across different conditions
+    public void getpriceVariationPerCondition(){
+        cars.stream().collect(Collectors.groupingBy(
+            Car::getCondition,
+            Collectors.collectingAndThen(
+                Collectors.toList(), 
+                list -> {
+                    Map<String, Double> map = new HashMap<>();
+                    map.put("AVG", ((Collection<Car>) list).stream().mapToDouble(Car::getPrice).average().orElse(0));
+                    map.put("Highest", ((Collection<Car>) list).stream().mapToDouble(Car::getPrice).max().orElse(0));
+                    map.put("Lowest", ((Collection<Car>) list).stream().mapToDouble(Car::getPrice).min().orElse(0));
+                    return map;
+                }
+            )
+        ))
+    }
+
 }

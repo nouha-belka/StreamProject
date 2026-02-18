@@ -316,7 +316,7 @@ public class StudentOps {
         }).toList();
     }
     // chatgpt told me there is a better way to do it 
-    // create a funtion seprately 
+    // create a funtion seprately and then use it in comparator 
     public double calculateScore(Student student) {
         double gpaScore = student.getGpa() / 4.0;
         double creditScore = Math.min(student.getCreditHours() / 120.0, 1.0);
@@ -330,6 +330,41 @@ public class StudentOps {
         return students.stream()
                         .sorted(Comparator.comparingDouble((Student x) -> calculateScore(x)).reversed())
                         .toList();
+    }
+
+
+    // Analyze correlation between age and academic performance
+    public void analyseCorelation(){
+        // mean is just average
+        double meanAge = students.stream()
+                .mapToDouble(Student::getAge)
+                .average()
+                .orElse(0.0);
+
+        double meanGpa = students.stream()
+                .mapToDouble(Student::getGpa)
+                .average()
+                .orElse(0.0);
+
+        // covariance = sum of (xi - xMean) * (yi - yMean) and then all of it devided by the size of the list
+        double covariance = students.stream()
+                    .mapToDouble(s -> (s.getGpa() - meanGpa) * (s.getAge() - meanAge))
+                    .sum() / students.size();
+
+        //deviation = sum of (xi - mean)squared and then devided by size and then square rooted
+        double deviationAge = Math.sqrt(students.stream().mapToDouble(x -> Math.pow( x.getAge() - meanAge, 2)).sum() / students.size());
+        double deviationGPA = Math.sqrt(students.stream().mapToDouble(x -> Math.pow( x.getGpa() - meanGpa, 2)).sum() / students.size());
+
+        //the correlation is covariance devided by multiplication of the deviations
+        double corelation = covariance / (deviationAge * deviationGPA);
+
+        if(corelation > 0 ){
+            System.out.println("Positive correlation: as age increases, GPA tends to increase.");
+        }else if(corelation == 0){
+            System.out.println("No correlation: age and GPA are unrelated.");
+        }else{
+            System.out.println("Negative correlation: as age increases, GPA tends to decrease.");
+        }
     }
 
     

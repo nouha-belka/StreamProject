@@ -40,7 +40,7 @@
     - STEM major
     - Scholarship recipient
 27. Create a comprehensive student profile ranking system
-28. Develop a predictive model for scholarship likelihood
+28. Develop a predictive model for scholarship likelihood 
 29. Analyze correlation between age and academic performance
 30. Group students by complex multi-dimensional criteria
 

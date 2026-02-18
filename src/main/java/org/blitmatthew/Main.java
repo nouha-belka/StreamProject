@@ -10,7 +10,8 @@ public class Main {
 
         // System.out.println(carOps.getCarCount());
         // System.out.println(studentOps.getStudentFromCriteria(2.89, false, true));
-        System.out.println(studentOps.rankStudents2());
+        // System.out.println(studentOps.analyseCorelation());
+        studentOps.analyseCorelation();
         // studentOps.getGenderRationByMajor();
     }
 }
